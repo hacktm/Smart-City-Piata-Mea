@@ -19,7 +19,17 @@
 
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <span class="glyphicon glyphicon-edit edit_pencil_product tipped" data-toggle="tooltip" data-placement="left" title="Editare pret"></span>
+                        <button type="button" class="btn btn-sm btn-info popovered edit_pencil" data-container="body"
+                                data-toggle="popover" data-placement="left" title="Schimba pret" data-html="true"
+                                data-content="
+                                    <form class='form-inline' role='form'>
+                                        <div class='form-group'>
+                                        <input type='email' class='form-control' id='exampleInputEmail2' placeholder='Enter email'>
+                                        <button type='submit' class='btn btn-success'>OK</button>
+                                    </div></form>
+                                ">
+                            <span class="glyphicon glyphicon-edit "></span>
+                        </button>
                         <img data-src="http://placehold.it/100x100" src="http://placehold.it/100x100" alt="...">
                         <div class="caption">
                             <h5>Nume Utilizator</h5>
