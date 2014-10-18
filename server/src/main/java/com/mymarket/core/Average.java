@@ -9,12 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "average")
+@NamedQueries({
+    @NamedQuery(
+        name = "com.mymarket.core.Average.findAll",
+        query = "SELECT p FROM Average p"
+    ),
+    @NamedQuery(
+        name = "com.mymarket.core.Average.findAllByMarket",
+        query = "SELECT p FROM Average p WHERE p.market.id = :market_id"
+    )
+})
 public class Average {
 
 	@Id

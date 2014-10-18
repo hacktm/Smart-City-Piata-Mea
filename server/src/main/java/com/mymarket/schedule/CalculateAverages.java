@@ -24,7 +24,10 @@ public class CalculateAverages implements org.quartz.Job {
 
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		SessionFactory sessionFactory = getSessionFactory(context);
-		
+
+		if (sessionFactory == null) {
+			return;
+		}
 		final MarketDAO marketDao = new MarketDAO(sessionFactory);
 		final ProductDAO productDao = new ProductDAO(sessionFactory);
 		final AverageDAO averageDao = new AverageDAO(sessionFactory);
@@ -45,7 +48,10 @@ public class CalculateAverages implements org.quartz.Job {
 	private SessionFactory getSessionFactory(JobExecutionContext context)
 			throws JobExecutionException {
 		HibernateBundle<MyMarketConfiguration> hibernateBundle = getHibernateBundle(context);
-
+		if (hibernateBundle == null) {
+			System.out.println("hibernateBundle is null");
+			return null;
+		}
 		SessionFactory sessionFactory = hibernateBundle.getSessionFactory();
 		return sessionFactory;
 	}
@@ -62,6 +68,8 @@ public class CalculateAverages implements org.quartz.Job {
 		@SuppressWarnings("unchecked")
 		HibernateBundle<MyMarketConfiguration> hibernateBundle = (HibernateBundle<MyMarketConfiguration>) schedulerContext
 				.get("hibernateBundle");
+		
+		
 		return hibernateBundle;
 	}
 }

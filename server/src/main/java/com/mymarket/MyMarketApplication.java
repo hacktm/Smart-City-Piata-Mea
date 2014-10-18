@@ -41,6 +41,10 @@ import com.mymarket.schedule.CalculateAverages;
 
 public class MyMarketApplication extends Application<MyMarketConfiguration> {
 	public static void main(String[] args) throws Exception {
+		
+		for (String arg :args) {
+			
+		}
 		new MyMarketApplication().run(args);
 	}
 
@@ -71,12 +75,6 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 		});
 		bootstrap.addBundle(hibernateBundle);
 		bootstrap.addBundle(new ViewBundle());
-		try {
-			initializeQuartz();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
 	}
 
 	private void initializeQuartz() throws SchedulerException {
@@ -123,6 +121,13 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 		environment.jersey()
 				.register(new MarketResource(marketDao, averageDao));
 		environment.jersey().register(new ProductResource(productDao));
+		
+		try {
+			initializeQuartz();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
 	}
 
 }
