@@ -14,6 +14,10 @@
                 templateUrl: "views/product.html",
                 controller: "ProductCtrl"
             })
+            .when("/user/profile", {
+                templateUrl: "views/profile.html",
+                controller: "ProfileCtrl"
+            })
     });
 
 } ());
