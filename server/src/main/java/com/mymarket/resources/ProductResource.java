@@ -55,8 +55,9 @@ public class ProductResource {
 	@UnitOfWork
 	public void addProduct(String json){
 		try {
-			Product readValue = new ObjectMapper().readValue(json, Product.class);
-			productDao.create(readValue);
+			Product productValues = new ObjectMapper().readValue(json, Product.class);
+			Market marketValues = new ObjectMapper().readValue(json, Market.class);
+			productDao.create(productValues, marketValues);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

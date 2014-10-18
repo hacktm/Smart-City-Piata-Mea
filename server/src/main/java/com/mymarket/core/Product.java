@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -26,21 +28,33 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	
-	@Column
+	@Column(name = "name", nullable = false)
 	String name;
 	
-	@Column
+	@Column(name = "description")
 	String description;
 
-	@Column
+	@Column(name = "price", nullable = false)
 	float price;
 	
-	@Column
+	@Column(name = "picture")
 	String picture;
 	
-	@Column
+	@Column(name = "origin", nullable = false)
 	String origin;
 	
+	@ManyToOne
+	@JoinColumn(name = "market_id")
+	Market market;
+	
+	public Market getMarket() {
+		return market;
+	}
+
+	public void setMarket(Market market) {
+		this.market = market;
+	}
+
 	public String getDescription() {
 		return description;
 	}
