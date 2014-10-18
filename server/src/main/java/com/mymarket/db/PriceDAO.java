@@ -29,4 +29,8 @@ public class PriceDAO extends AbstractDAO<Price> {
 		return persist(price);
 	}
 
+	public Price create(Price price) {
+		return persist(price);
+	}
+
 }

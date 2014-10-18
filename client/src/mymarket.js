@@ -14,9 +14,13 @@
                 templateUrl: "views/product.html",
                 controller: "ProductCtrl"
             })
-            .when("/user/profile", {
+            .when("/user/profile/:idUser", {
                 templateUrl: "views/profile.html",
                 controller: "ProfileCtrl"
+            })
+            .when("/market/:idMarket/productEdit/:idProduct", {
+                templateUrl: "views/product_edit.html",
+                controller: "ProductEditCtrl"
             })
     });
 
