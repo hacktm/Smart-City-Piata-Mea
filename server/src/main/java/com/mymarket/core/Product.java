@@ -28,6 +28,50 @@ public class Product {
 	
 	@Column
 	String name;
+	
+	@Column
+	String description;
+
+	@Column
+	float price;
+	
+	@Column
+	String picture;
+	
+	@Column
+	String origin;
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
 
 	public Long getId() {
 		return id;

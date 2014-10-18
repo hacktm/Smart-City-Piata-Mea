@@ -27,4 +27,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return list(namedQuery("com.mymarket.core.Product.findAll"));
 	}
 
+	public List<Product> findById() {
+		return list(namedQuery("com.mymarket.core.Product.findById"));
+	}
 }
