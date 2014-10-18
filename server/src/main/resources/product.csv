@@ -1,2 +1,2 @@
-id,name,description,price,picture,origin
-1,mere,mere,100,'',700
+id,name,description,picture,origin,market_id
+1,mere,mere,'',700,1

@@ -39,33 +39,34 @@ public class ProductResource {
 		return productDao.findAll();
 	}
 	
-//	@GET
-//	@Path("/product/id")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@UnitOfWork
-//	public Market getMarketById(@PathParam("Id") LongParam id) {
-//		final Optional<Market> market = productDao.findById(id.get());
-//		if (!market.isPresent()) {
-//			throw new NotFoundException("No such market.");
-//		}
-//		return market.get();
-//	}
-//	
-//	@PUT
-//	@UnitOfWork
-//	public void addMarket(String json){
-//		try {
-//			Market readValue = new ObjectMapper().readValue(json, Market.class);
-//			productDao.create(readValue);
-//		} catch (JsonParseException e) {
-//			e.printStackTrace();
-//		} catch (JsonMappingException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		
-//	}
+	@GET
+	@Path("/product/id")
+	@Produces(MediaType.APPLICATION_JSON)
+	@UnitOfWork
+	public Product getMarketById(@PathParam("Id") LongParam id) {
+		final Optional<Product> product = productDao.findById(id.get());
+		if (!product.isPresent()) {
+			throw new NotFoundException("No such product.");
+		}
+		return product.get();
+	}
+	
+	@PUT
+	@UnitOfWork
+	public void addProduct(String json){
+		try {
+			Product productValues = new ObjectMapper().readValue(json, Product.class);
+			Market marketValues = new ObjectMapper().readValue(json, Market.class);
+			productDao.create(productValues, marketValues);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 }

@@ -2,8 +2,14 @@
 
 (function(app) {
 
-    var MainCtrl = function() {
-        console.log("Main");
+    var MainCtrl = function($scope, $http) {
+        $http.get("/api/market/1/products.json")
+            .success(function(data) {
+
+            })
+            .error(function() {
+                toastr.notify("Produsele ")
+            })
     };
 
     app.controller("MainCtrl", MainCtrl);
