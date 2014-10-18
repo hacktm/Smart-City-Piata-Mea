@@ -1,14 +1,5 @@
 package com.mymarket;
 
-import com.mymarket.auth.ExampleAuthenticator;
-import com.mymarket.cli.RenderCommand;
-import com.mymarket.core.Person;
-import com.mymarket.core.Template;
-import com.mymarket.db.MarketDAO;
-import com.mymarket.db.PersonDAO;
-import com.mymarket.health.TemplateHealthCheck;
-import com.mymarket.resources.*;
-
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.basic.BasicAuthProvider;
@@ -19,13 +10,27 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 
+import com.mymarket.auth.ExampleAuthenticator;
+import com.mymarket.cli.RenderCommand;
+import com.mymarket.core.Market;
+import com.mymarket.core.Template;
+import com.mymarket.db.MarketDAO;
+import com.mymarket.db.PersonDAO;
+import com.mymarket.health.TemplateHealthCheck;
+import com.mymarket.resources.MarketResource;
+import com.mymarket.resources.MyMarketResource;
+import com.mymarket.resources.PeopleResource;
+import com.mymarket.resources.PersonResource;
+import com.mymarket.resources.ProtectedResource;
+import com.mymarket.resources.ViewResource;
+
 public class MyMarketApplication extends Application<MyMarketConfiguration> {
     public static void main(String[] args) throws Exception {
         new MyMarketApplication().run(args);
     }
 
     private final HibernateBundle<MyMarketConfiguration> hibernateBundle =
-            new HibernateBundle<MyMarketConfiguration>(Person.class) {
+            new HibernateBundle<MyMarketConfiguration>(Market.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(MyMarketConfiguration configuration) {
                     return configuration.getDataSourceFactory();
