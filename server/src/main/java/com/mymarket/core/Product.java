@@ -33,9 +33,6 @@ public class Product {
 	
 	@Column(name = "description")
 	String description;
-
-	@Column(name = "price", nullable = false)
-	float price;
 	
 	@Column(name = "picture")
 	String picture;
@@ -61,14 +58,6 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
 	}
 
 	public String getPicture() {
