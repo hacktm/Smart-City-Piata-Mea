@@ -1,3 +1,10 @@
 mvn clean install
 
+updatedb.sh
+
+
+
 run.sh
+
+# to execute a Market add you can test with : curl -H "Content-Type: application/json" -X PUT -d '{"name":"Traian","description":"Traian", "location":"^C' http://localhost:8080/market 
+

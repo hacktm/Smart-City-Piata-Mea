@@ -19,13 +19,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
-public class HelloWorldResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldResource.class);
+public class MyMarketResource {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyMarketResource.class);
 
     private final Template template;
     private final AtomicLong counter;
 
-    public HelloWorldResource(Template template) {
+    public MyMarketResource(Template template) {
         this.template = template;
         this.counter = new AtomicLong();
     }
