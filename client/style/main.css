@@ -1,3 +1,17 @@
+/*** BootStrap Overwrites ****/
+
+.thumbnail{
+    position: relative;
+}
+
+/*******************************/
+
 body {
     margin-top: 60px;
+}
+
+.edit_pencil_product{
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
