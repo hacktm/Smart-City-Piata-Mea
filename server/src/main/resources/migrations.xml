@@ -23,26 +23,16 @@
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="name" type="varchar(255)">
-				<constraints nullable="false" />
 			</column>
 			<column name="description" type="varchar(255)">
-				<constraints nullable="false" />
 			</column>
 			<column name="location" type="varchar(255)">
-				<constraints nullable="false" />
 			</column>
 		</createTable>
-		<loadData encoding="UTF-8" file="market.csv"
-			tableName="market">
-			<column name="name" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="description" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="location" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
+		<loadData encoding="UTF-8" file="market.csv" tableName="market">
+			<column name="name" type="string"/>
+			<column name="description" type="string"/>
+			<column name="location" type="string"/>
 		</loadData>
 	</changeSet>
 </databaseChangeLog>

@@ -1,3 +1,7 @@
 mvn clean install
 
+updatedb.sh
+
+
+
 run.sh
