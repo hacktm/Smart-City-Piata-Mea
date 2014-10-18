@@ -12,6 +12,8 @@
         };
 
         $scope.arr = [1,2,3,4,5];
+
+        $('.tipped').tooltip();
     };
 
     app.controller("ProductCtrl", ProductCtrl);
