@@ -4,6 +4,7 @@ import com.mymarket.auth.ExampleAuthenticator;
 import com.mymarket.cli.RenderCommand;
 import com.mymarket.core.Person;
 import com.mymarket.core.Template;
+import com.mymarket.db.MarketDAO;
 import com.mymarket.db.PersonDAO;
 import com.mymarket.health.TemplateHealthCheck;
 import com.mymarket.resources.*;
@@ -18,31 +19,31 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 
-public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
+public class MyMarketApplication extends Application<MyMarketConfiguration> {
     public static void main(String[] args) throws Exception {
-        new HelloWorldApplication().run(args);
+        new MyMarketApplication().run(args);
     }
 
-    private final HibernateBundle<HelloWorldConfiguration> hibernateBundle =
-            new HibernateBundle<HelloWorldConfiguration>(Person.class) {
+    private final HibernateBundle<MyMarketConfiguration> hibernateBundle =
+            new HibernateBundle<MyMarketConfiguration>(Person.class) {
                 @Override
-                public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
+                public DataSourceFactory getDataSourceFactory(MyMarketConfiguration configuration) {
                     return configuration.getDataSourceFactory();
                 }
             };
 
     @Override
     public String getName() {
-        return "hello-world";
+        return "mymarket";
     }
 
     @Override
-    public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+    public void initialize(Bootstrap<MyMarketConfiguration> bootstrap) {
         bootstrap.addCommand(new RenderCommand());
         bootstrap.addBundle(new AssetsBundle());
-        bootstrap.addBundle(new MigrationsBundle<HelloWorldConfiguration>() {
+        bootstrap.addBundle(new MigrationsBundle<MyMarketConfiguration>() {
             @Override
-            public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
+            public DataSourceFactory getDataSourceFactory(MyMarketConfiguration configuration) {
                 return configuration.getDataSourceFactory();
             }
         });
@@ -51,19 +52,23 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     }
 
     @Override
-    public void run(HelloWorldConfiguration configuration,
+    public void run(MyMarketConfiguration configuration,
                     Environment environment) throws ClassNotFoundException {
         final PersonDAO dao = new PersonDAO(hibernateBundle.getSessionFactory());
+        final MarketDAO marketDao = new MarketDAO(hibernateBundle.getSessionFactory());
+        
         final Template template = configuration.buildTemplate();
 
         environment.healthChecks().register("template", new TemplateHealthCheck(template));
 
         environment.jersey().register(new BasicAuthProvider<>(new ExampleAuthenticator(),
                                                               "SUPER SECRET STUFF"));
-        environment.jersey().register(new HelloWorldResource(template));
+        environment.jersey().register(new MyMarketResource(template));
         environment.jersey().register(new ViewResource());
         environment.jersey().register(new ProtectedResource());
         environment.jersey().register(new PeopleResource(dao));
         environment.jersey().register(new PersonResource(dao));
+        environment.jersey().register(new MarketResource(marketDao));
+        
     }
 }
