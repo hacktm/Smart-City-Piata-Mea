@@ -4,7 +4,10 @@
     </div>
     <div class="panel-body">
         <div class="list-group">
-            <a href="#" class="list-group-item" ng-repeat="market in markets">{{ market.name }}</a>
+            <a href="#/market/{{ market.id }}"
+               class="list-group-item"
+               ng-repeat="market in markets"
+               ng-class="{active: isActive(market.id)}">{{ market.name }}</a>
         </div>
     </div>
     <div class="panel panel-default">

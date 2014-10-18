@@ -10,6 +10,10 @@
                 templateUrl: "views/main.html",
                 controller: "MainCtrl"
             })
+            .when("/market/:idMarket", {
+                templateUrl: "views/markets.html",
+                controller: "MarketCtrl"
+            })
             .when("/market/:idMarket/product/:idProduct", {
                 templateUrl: "views/product.html",
                 controller: "ProductCtrl"

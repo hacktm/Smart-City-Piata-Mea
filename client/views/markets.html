@@ -1,0 +1,45 @@
+<div class="row" style="margin-top: 30px;">
+    <div class="col-md-4">
+        <sidemenu></sidemenu>
+    </div>
+
+    <div class="col-md-8">
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-md-4"><h5>Produse disponibile</h5></div>
+            <div class="col-md-4">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                            <input class="form-control" type="search" placeholder="Filtrare produse" ng-model="query">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 ">
+                <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addproduct_modal">
+                    <span class="glyphicon glyphicon-plus"></span> Adauga produs
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4" ng-repeat="product in products | filter:query ">
+                        <div class="thumbnail">
+                            <a href="#/market/{{ idMarket }}/productEdit/{{ product.product.id }}">
+                                <span class="glyphicon glyphicon-edit edit_pencil_product"></span>
+                            </a>
+                            <a href="#/market/{{ idMarket }}/product/{{ product.product.id }}">
+                                <img data-src="http://placehold.it/300x300" src="http://placehold.it/300x300"  alt="...">
+                                <div class="caption">
+                                    <h5>Pret mediu: {{ product.value }} RON</h5>
+                                    <p>{{ product.product.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -23,7 +23,40 @@
 },{
     "product": {
         "id": 1,
-        "name": "mere",
+        "name": "banane",
+        "description": null,
+        "picture": "comuna.jpg",
+        "origin": "comuna",
+        "market": null
+    },
+    "value": 70.0,
+    "date": 1413659534742
+},{
+    "product": {
+        "id": 4,
+        "name": "rosii",
+        "description": null,
+        "picture": "comuna.jpg",
+        "origin": "comuna",
+        "market": null
+    },
+    "value": 100.0,
+    "date": 1413659534742
+},{
+    "product": {
+        "id": 5,
+        "name": "castraveti",
+        "description": null,
+        "picture": "comuna.jpg",
+        "origin": "comuna",
+        "market": null
+    },
+    "value": 20.0,
+    "date": 1413659534742
+},{
+    "product": {
+        "id": 6,
+        "name": "cartofi",
         "description": null,
         "picture": "comuna.jpg",
         "origin": "comuna",
@@ -32,4 +65,5 @@
     "value": 70.0,
     "date": 1413659534742
 }
+
 ]

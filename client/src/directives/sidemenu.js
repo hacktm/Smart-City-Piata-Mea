@@ -14,6 +14,10 @@
                     .error(function() {
                         toastr.error("Pietele nu au putut fi citite de pe server");
                     });
+
+                scope.isActive = function(id) {
+                    return scope.idMarket == id;
+                }
             }
         }
     };
