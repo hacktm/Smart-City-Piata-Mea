@@ -6,12 +6,12 @@
         $scope.idMarket = $routeParams.idMarket;
         $scope.query = "";
 
-        $http.get("/api/market/1/products.json")
+        $http.get("/api/market/1/products.jso")
             .success(function(data) {
                 $scope.products = data;
             })
             .error(function() {
-                toastr.notify("Produsele ")
+                toastr.error("Produsele nu au putut fi citite de pe server");
             })
     };
     app.controller("MarketCtrl", MarketCtrl)
