@@ -14,6 +14,7 @@
         $scope.arr = [1,2,3,4,5];
 
         $('.tipped').tooltip();
+        $('.popovered').popover();
     };
 
     app.controller("ProductCtrl", ProductCtrl);
