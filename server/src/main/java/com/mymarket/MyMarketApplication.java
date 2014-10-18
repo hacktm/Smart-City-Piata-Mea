@@ -13,14 +13,17 @@ import io.dropwizard.views.ViewBundle;
 import com.mymarket.auth.ExampleAuthenticator;
 import com.mymarket.cli.RenderCommand;
 import com.mymarket.core.Market;
+import com.mymarket.core.Product;
 import com.mymarket.core.Template;
 import com.mymarket.db.MarketDAO;
 import com.mymarket.db.PersonDAO;
+import com.mymarket.db.ProductDAO;
 import com.mymarket.health.TemplateHealthCheck;
 import com.mymarket.resources.MarketResource;
 import com.mymarket.resources.MyMarketResource;
 import com.mymarket.resources.PeopleResource;
 import com.mymarket.resources.PersonResource;
+import com.mymarket.resources.ProductResource;
 import com.mymarket.resources.ProtectedResource;
 import com.mymarket.resources.ViewResource;
 
@@ -30,7 +33,7 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
     }
 
     private final HibernateBundle<MyMarketConfiguration> hibernateBundle =
-            new HibernateBundle<MyMarketConfiguration>(Market.class) {
+            new HibernateBundle<MyMarketConfiguration>(Market.class, Product.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(MyMarketConfiguration configuration) {
                     return configuration.getDataSourceFactory();
@@ -61,6 +64,7 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
                     Environment environment) throws ClassNotFoundException {
         final PersonDAO dao = new PersonDAO(hibernateBundle.getSessionFactory());
         final MarketDAO marketDao = new MarketDAO(hibernateBundle.getSessionFactory());
+        final ProductDAO productDao = new ProductDAO(hibernateBundle.getSessionFactory());
         
         final Template template = configuration.buildTemplate();
 
@@ -74,6 +78,6 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
         environment.jersey().register(new PeopleResource(dao));
         environment.jersey().register(new PersonResource(dao));
         environment.jersey().register(new MarketResource(marketDao));
-        
+		environment.jersey().register(new ProductResource(productDao));
     }
 }
