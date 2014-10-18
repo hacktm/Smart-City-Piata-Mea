@@ -1,0 +1,12 @@
+{
+  "name": "PiataMea",
+  "version": "0.0.0",
+  "homepage": "https://github.com/hacktm/Smart-City-Piata-Mea",
+  "description": "Hack TM piata mea",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.3.0",
+    "bootstrap": "~3.2.0",
+    "angular-route": "~1.3.0"
+  }
+}
