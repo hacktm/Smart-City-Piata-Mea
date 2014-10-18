@@ -17,7 +17,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Optional;
+import com.mymarket.core.Average;
 import com.mymarket.core.Market;
+import com.mymarket.db.AverageDAO;
 import com.mymarket.db.MarketDAO;
 import com.sun.jersey.api.NotFoundException;
 
@@ -26,9 +28,11 @@ import com.sun.jersey.api.NotFoundException;
 public class MarketResource {
 
 	private final MarketDAO marketDao;
+	private final AverageDAO averageDao;
 
-	public MarketResource(MarketDAO marketDao2) {
+	public MarketResource(MarketDAO marketDao2, AverageDAO averageDao) {
 		this.marketDao = marketDao2;
+		this.averageDao = averageDao;
 	}
 
 	@GET
@@ -39,15 +43,27 @@ public class MarketResource {
 	}
 	
 	@GET
-	@Path("/market/id")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@UnitOfWork
-	public Market getMarketById(@PathParam("Id") LongParam id) {
+	public Market getMarketById(@PathParam("id") LongParam id) {
 		final Optional<Market> market = marketDao.findById(id.get());
 		if (!market.isPresent()) {
 			throw new NotFoundException("No such market.");
 		}
 		return market.get();
+	}
+	
+	@GET
+	@Path("/{id}/product")
+	@Produces(MediaType.APPLICATION_JSON)
+	@UnitOfWork
+	public List<Average> getMarketAveragesById(@PathParam("id") LongParam id) {
+		final List<Average> marketAverages = averageDao.findAllByMarket(id.get());
+		if (marketAverages.isEmpty()) {
+			throw new NotFoundException("No such market.");
+		}
+		return marketAverages;
 	}
 	
 	@PUT

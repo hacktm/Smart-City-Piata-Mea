@@ -3,8 +3,11 @@ package com.mymarket.db;
 import io.dropwizard.hibernate.AbstractDAO;
 
 import java.util.Date;
+import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
 
 import com.google.common.base.Optional;
 import com.mymarket.core.Market;
@@ -29,8 +32,18 @@ public class PriceDAO extends AbstractDAO<Price> {
 		return persist(price);
 	}
 
-	public Price create(Price price) {
-		return persist(price);
+	public List<Price> findByMarketAndDate(Market market, DateTime now) {
+		
+		DateTime todayStart = now.withTimeAtStartOfDay();
+		DateTime tomorrowStart = now.plusDays( 1 ).withTimeAtStartOfDay();
+		
+		Query query = namedQuery("com.mymarket.core.Price.findByMarketAndDate");
+		query.setParameter(":market_id", market.getId());
+		query.setParameter(":startdate", todayStart.toDate());
+		query.setParameter(":enddate", tomorrowStart.toDate());
+
+		return list(query);
+
 	}
 
 }

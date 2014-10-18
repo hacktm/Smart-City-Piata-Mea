@@ -30,9 +30,9 @@
 			</column>
 		</createTable>
 		<loadData encoding="UTF-8" file="market.csv" tableName="market">
-			<column name="name" type="string"/>
-			<column name="description" type="string"/>
-			<column name="location" type="string"/>
+			<column name="name" type="string" />
+			<column name="description" type="string" />
+			<column name="location" type="string" />
 		</loadData>
 	</changeSet>
 	<changeSet id="3" author="vladilie">
@@ -54,13 +54,47 @@
 			</column>
 		</createTable>
 		<loadData encoding="UTF-8" file="product.csv" tableName="product">
-			<column name="id" type="string"/>
-			<column name="name" type="string"/>
-			<column name="description" type="string"/>
-			<column name="price" type="string"/>
-			<column name="picture" type="string"/>
-			<column name="origin" type="string"/>
+
+			<column name="id" type="string" />
+			<column name="name" type="string" />
+			<column name="description" type="string" />
+			<column name="price" type="string" />
+			<column name="picture" type="string" />
+			<column name="origin" type="string" />
 		</loadData>
+
+	</changeSet>
+	<changeSet id="4" author="vladilie">
+		<createTable tableName="price">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			
+			<column name="market_id" type="bigint">
+			</column>
+			
+			<column name="product_id" type="bigint">
+			</column>
+			<column name="date" type="DateTime">
+			</column>
+			<column name="value" type="bigint">
+			</column>
+		</createTable>
+	</changeSet>
 	
+	<changeSet id="5" author="vladilie">
+		<createTable tableName="average">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			
+			<column name="market_id" type="bigint">
+			</column>
+			
+			<column name="product_id" type="bigint">
+			</column>
+			<column name="value" type="bigint">
+			</column>
+		</createTable>
 	</changeSet>
 </databaseChangeLog>

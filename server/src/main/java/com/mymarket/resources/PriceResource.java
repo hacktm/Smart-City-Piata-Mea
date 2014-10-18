@@ -54,7 +54,7 @@ public class PriceResource {
 	public void addPrice(String json){
 		try {
 			Price readValue = new ObjectMapper().readValue(json, Price.class);
-			priceDao.create(readValue);
+		//	priceDao.create(readValue);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

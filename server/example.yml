@@ -6,8 +6,9 @@ defaultName: Stranger
 database:
 
   # the name of your JDBC driver
-  driverClass: org.h2.Driver
-
+  # driverClass: org.h2.Driver
+  driverClass: com.mysql.jdbc.Driver
+  
   # the username
   user: sa
 
@@ -15,8 +16,9 @@ database:
   password: sa
 
   # the JDBC URL
-  url: jdbc:h2:target/example
-
+  #url: jdbc:h2:target/example
+  url: jdbc:mysql://localhost:3306/piata
+  
 # use the simple server factory if you only want to run on a single port
 #server:
 #  type: simple

@@ -9,11 +9,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "price")
-
+@NamedQueries({
+    @NamedQuery(
+        name = "com.mymarket.core.Price.findAll",
+        query = "SELECT p FROM Price p"
+    ),
+    @NamedQuery(
+        name = "com.mymarket.core.Price.findById",
+        query = "SELECT p FROM Price p WHERE p.id = :id"
+    ),
+    @NamedQuery(
+            name = "com.mymarket.core.Price.findByMarketAndDate",
+            query = "SELECT p FROM Price p WHERE p.market.id = :market_id and p.date between :startdate and :enddate"
+        )
+})
 public class Price {
 	
 	@Id
