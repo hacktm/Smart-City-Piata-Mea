@@ -3,6 +3,7 @@ package com.mymarket.resources;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.LongParam;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -12,6 +13,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Optional;
 import com.mymarket.core.Market;
 import com.mymarket.db.MarketDAO;
@@ -47,10 +51,20 @@ public class MarketResource {
 	}
 	
 	@PUT
-	@Path("/market")
-	@Produces(MediaType.APPLICATION_JSON)
 	@UnitOfWork
 	public void addMarket(String json){
+		try {
+			Market readValue = new ObjectMapper().readValue(json, Market.class);
+			marketDao.create(readValue);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }
