@@ -51,20 +51,15 @@ public class AverageDAO extends AbstractDAO<Average> {
 	}
 
 	public List<Average> findAll() {
-		return list(namedQuery("com.myAverage.core.Average.findAll"));
+		return list(namedQuery("com.mymarket.core.Average.findAll"));
 	}
 	
 	public List<Average> findAllByMarket(Long marketId) {
-		Query namedQuery = namedQuery("com.myAverage.core.Average.findAllByMarket");
-		namedQuery.setParameter("marketId", marketId);
+		Query namedQuery = namedQuery("com.mymarket.core.Average.findAllByMarket");
+		namedQuery.setParameter("market_id", marketId);
 		return list(namedQuery);
 	}
 
-
-	public List<Average> findByName(String name) {
-		return list(namedQuery("com.myAverage.core.Average.findByName"));
-	}
- 
 	@SuppressWarnings("unchecked")
 	public List<AverageCalculationResult> createAveragesByMarketAndDate(Market market , DateTime now){
 		

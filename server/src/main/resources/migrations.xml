@@ -87,13 +87,13 @@
 			<column name="id" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			
 			<column name="market_id" type="bigint">
 			</column>
-			
 			<column name="product_id" type="bigint">
 			</column>
 			<column name="value" type="bigint">
+			</column>
+			<column name="date" type="DateTime">
 			</column>
 		</createTable>
 	</changeSet>
