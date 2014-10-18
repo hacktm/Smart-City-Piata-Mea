@@ -35,4 +35,31 @@
 			<column name="location" type="string"/>
 		</loadData>
 	</changeSet>
+	<changeSet id="3" author="vladilie">
+		<createTable tableName="product">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)">
+			</column>
+			<column name="description" type="varchar(255)">
+			</column>
+			<column name="price" type="varchar(255)">
+			</column>
+			<column name="picture" type="varchar(255)">
+			</column>
+			<column name="origin" type="varchar(255)">
+			</column>
+		</createTable>
+		<loadData encoding="UTF-8" file="product.csv" tableName="product">
+			<column name="id" type="string"/>
+			<column name="name" type="string"/>
+			<column name="description" type="string"/>
+			<column name="price" type="string"/>
+			<column name="picture" type="string"/>
+			<column name="origin" type="string"/>
+		
+		</loadData>
+	
+	</changeSet>
 </databaseChangeLog>
