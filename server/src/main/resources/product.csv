@@ -1,2 +1,2 @@
-id,name,description,picture,origin,market_id
-1,mere,mere,'',700,1
+id,name,description,image_url,origin
+1,mere,mere,'',700

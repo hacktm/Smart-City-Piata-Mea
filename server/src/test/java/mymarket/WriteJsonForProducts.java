@@ -51,7 +51,7 @@ public class WriteJsonForProducts {
 		product.setId((long) 1);
 		product.setName("mere");
 		product.setOrigin("comuna");
-		product.setPicture("comuna.jpg");
+		product.setImageUrl("comuna.jpg");
 		return product;
 	}
 }

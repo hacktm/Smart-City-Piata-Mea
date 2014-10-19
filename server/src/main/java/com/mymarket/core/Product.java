@@ -34,38 +34,18 @@ public class Product {
 	@Column(name = "description")
 	String description;
 	
-	@Column(name = "picture")
-	String picture;
+	@Column(name = "image_url")
+	String imageUrl;
 	
 	@Column(name = "origin", nullable = false)
 	String origin;
 	
-	@ManyToOne
-	@JoinColumn(name = "market_id")
-	Market market;
-	
-	public Market getMarket() {
-		return market;
-	}
-
-	public void setMarket(Market market) {
-		this.market = market;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getPicture() {
-		return picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
 	}
 
 	public String getOrigin() {
@@ -91,5 +71,15 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
+	
 	
 }

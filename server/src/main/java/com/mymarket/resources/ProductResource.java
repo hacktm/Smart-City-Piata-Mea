@@ -56,8 +56,7 @@ public class ProductResource {
 	public void addProduct(String json){
 		try {
 			Product productValues = new ObjectMapper().readValue(json, Product.class);
-			Market marketValues = new ObjectMapper().readValue(json, Market.class);
-			productDao.create(productValues, marketValues);
+			productDao.create(productValues);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -65,8 +64,23 @@ public class ProductResource {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+	}
+	
+	@PUT
+	@Path("/{id}")
+	@UnitOfWork
+	public void editProduct(@PathParam("id") LongParam id,String json){
+		try {
+			Product productValues = new ObjectMapper().readValue(json, Product.class);
+			productValues.setId(id.get());
+			productDao.update(productValues);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

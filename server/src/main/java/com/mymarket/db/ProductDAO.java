@@ -4,11 +4,12 @@ import io.dropwizard.hibernate.AbstractDAO;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.SessionFactory;
 
 import com.google.common.base.Optional;
-import com.mymarket.core.Market;
 import com.mymarket.core.Product;
+import com.sun.jersey.api.NotFoundException;
 
 public class ProductDAO extends AbstractDAO<Product> {
 
@@ -20,8 +21,7 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return Optional.fromNullable(get(id));
 	}
 
-	public Product create(Product product, Market market) {
-		product.setMarket(market);
+	public Product create(Product product) {
 		return persist(product);
 	}
 
@@ -29,7 +29,18 @@ public class ProductDAO extends AbstractDAO<Product> {
 		return list(namedQuery("com.mymarket.core.Product.findAll"));
 	}
 
-	public List<Product> findById() {
-		return list(namedQuery("com.mymarket.core.Product.findById"));
+	public Product update(Product productValues) {
+		Optional<Product> findById = findById(productValues.getId());
+		if (!findById.isPresent()) {
+			throw new NotFoundException("Product missing");
+		}
+		Product found = findById.get();
+		found.setImageUrl(!StringUtils.isEmpty(productValues.getImageUrl()) ? productValues.getImageUrl() : found.getImageUrl());
+		found.setOrigin(!StringUtils.isEmpty(productValues.getOrigin()) ? productValues.getOrigin() : found.getOrigin());
+		
+		persist(found);
+		
+		return found;
 	}
+ 
 }

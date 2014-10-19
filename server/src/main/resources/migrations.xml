@@ -46,12 +46,11 @@
 			</column>
 			<column name="price" type="varchar(255)">
 			</column>
-			<column name="picture" type="varchar(255)">
+			<column name="image_url" type="varchar(255)">
 			</column>
 			<column name="origin" type="varchar(255)">
 			</column>
-			<column name="market_id" type="bigint">
-			</column>
+			 
 		</createTable>
 		<loadData encoding="UTF-8" file="product.csv" tableName="product">
 
@@ -59,7 +58,7 @@
 			<column name="name" type="string" />
 			<column name="description" type="string" />
 			<column name="price" type="string" />
-			<column name="picture" type="string" />
+			<column name="image_url" type="string" />
 			<column name="origin" type="string" />
 		</loadData>
 

@@ -84,7 +84,7 @@ public class AverageDAO extends AbstractDAO<Average> {
 		
 		DateTime tomorrowStart = now.plusDays( 1 ).withTimeAtStartOfDay();
 		
-		Query query = sqlQuery("SELECT PRODUCT_ID, SUM(VALUE) / COUNT(product_id) NUMBER FROM piata.price WHERE market_id = ? and date between ? and ? GROUP by pricE.PRODUCT_ID");
+		Query query = sqlQuery("SELECT PRODUCT_ID, SUM(VALUE) / COUNT(product_id) NUMBER FROM price WHERE market_id = ? and date between ? and ? GROUP by price.PRODUCT_ID");
 		query.setParameter(0, market.getId());
 		query.setParameter(1, now.toDate());
 		query.setParameter(2, tomorrowStart.toDate());

@@ -7,4 +7,4 @@ updatedb.sh
 run.sh
 
 # to execute a Market add you can test with : curl -H "Content-Type: application/json" -X PUT -d '{"name":"Traian","description":"Traian", "location":"Train"}' http://localhost:8080/market 
-
+# to execute a Product add you can test with : curl -H "Content-Type: application/json" -X PUT -d '{"name": "mere","description": "mere","imageUrl": "","origin": "700"}' http://localhost:8080/product

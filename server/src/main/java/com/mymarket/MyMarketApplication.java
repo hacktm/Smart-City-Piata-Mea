@@ -10,6 +10,9 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 
 import com.mymarket.auth.ExampleAuthenticator;
@@ -36,7 +39,15 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 	public static final HibernateSessionFactoryBuilder builder = new HibernateSessionFactoryBuilder();
 
 	public static void main(String[] args) throws Exception {
-		new MyMarketApplication().run(args);
+		List<String> argsList = Arrays.asList(args);
+		MyMarketApplication myMarketApplication = new MyMarketApplication();
+		if (argsList.contains("db")) {
+			myMarketApplication.run(new String[] {"db", "migrate", "example.yml"});
+		} else if (argsList.size() == 0){
+			myMarketApplication.run(new String[] {"server", "example.yml"});
+		} else {
+			myMarketApplication.run(args);
+		}
 	}
 
 	@Override
@@ -59,22 +70,23 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 		bootstrap.addBundle(new ViewBundle());
 	}
 
-
 	@Override
 	public void run(MyMarketConfiguration configuration, Environment environment)
 			throws ClassNotFoundException {
 
 		final Template template = configuration.buildTemplate();
-		environment.healthChecks().register("template",	new TemplateHealthCheck(template));
+		environment.healthChecks().register("template",
+				new TemplateHealthCheck(template));
 
 		setupJersey(environment, template);
-		
+
 		setupQuartz(configuration, environment);
 	}
 
 	private void setupQuartz(MyMarketConfiguration configuration,
 			Environment environment) {
-		environment.lifecycle().manage(	new QuartzManager(environment, configuration));
+		environment.lifecycle().manage(
+				new QuartzManager(environment, configuration));
 	}
 
 	private void setupJersey(Environment environment, final Template template) {
@@ -84,7 +96,7 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 		final ProductDAO productDao = new ProductDAO(sessionFactory);
 		final AverageDAO averageDao = new AverageDAO(sessionFactory);
 		final UserDAO userDao = new UserDAO(sessionFactory);
-		
+
 		JerseyEnvironment jersey = environment.jersey();
 		jersey.register(new BasicAuthProvider<>(new ExampleAuthenticator(),
 				"SUPER SECRET STUFF"));
@@ -95,9 +107,10 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 		jersey.register(new PersonResource(dao));
 		jersey.register(new MarketResource(marketDao, averageDao));
 		jersey.register(new ProductResource(productDao));
-		jersey.register(new CalculateAveragesResource(marketDao, productDao, averageDao));
+		jersey.register(new CalculateAveragesResource(marketDao, productDao,
+				averageDao));
 		jersey.register(new UserResource(userDao));
-		
+
 	}
 
 }
