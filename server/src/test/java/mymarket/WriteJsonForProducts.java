@@ -1,6 +1,7 @@
 package mymarket;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,6 +30,7 @@ public class WriteJsonForProducts {
 		
 		average1.setValue((float) 100);
 		averages.add(average1);
+		System.out.println(new Timestamp(new Date().getTime()));
 		try {
 			new ObjectMapper().writeValue(System.out, market);
 		} catch (JsonGenerationException e) {
@@ -41,7 +43,7 @@ public class WriteJsonForProducts {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private static Product getProduct() {

@@ -25,7 +25,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     @NamedQuery(
         name = "com.mymarket.core.Average.findAllByMarket",
         query = "SELECT p FROM Average p WHERE p.market.id = :market_id"
-    )
+    ),
+    @NamedQuery(
+            name = "com.mymarket.core.Average.findAllByMarketAndProduct",
+            query = "SELECT p FROM Average p WHERE p.market.id = :market_id and p.product.id = :product_id"
+        ),
+        @NamedQuery(
+                name = "com.mymarket.core.Average.findByMarketAndProductAndDate",
+                query = "SELECT p FROM Average p WHERE p.market.id = :market_id and p.product.id = :product_id and p.date = :date"
+            )
 })
 public class Average {
 

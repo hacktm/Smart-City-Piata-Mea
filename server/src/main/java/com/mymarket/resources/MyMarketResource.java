@@ -26,7 +26,7 @@ public class MyMarketResource {
     private final AtomicLong counter;
 
     public MyMarketResource(Template template) {
-        this.template = template;
+        this.template = template;	
         this.counter = new AtomicLong();
     }
 

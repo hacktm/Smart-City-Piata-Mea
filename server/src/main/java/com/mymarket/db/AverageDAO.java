@@ -42,12 +42,24 @@ public class AverageDAO extends AbstractDAO<Average> {
 	}
 
 	public Average create(Market market, Product product, float value, Date day) {
-		Average average = new Average();
-		average.setMarket(market);
-		average.setProduct(product);
+		DateTime now = new DateTime( day);
+		Average average = findAllByMarketAndProduct(market.getId(), product.getId(), now);
+		if (average == null) {
+			average = new Average();
+			average.setMarket(market);
+			average.setProduct(product);
+			average.setDate(now.withTimeAtStartOfDay().toDate());
+		}
 		average.setValue(value);
-		average.setDate(day);
 		return persist(average);
+	}
+
+	public Average findAllByMarketAndProduct(long id, Long id2, DateTime now) {
+		Query namedQuery = namedQuery("com.mymarket.core.Average.findByMarketAndProductAndDate");
+		namedQuery.setParameter("market_id", id);
+		namedQuery.setParameter("product_id", id2);
+		namedQuery.setParameter("date", now.withTimeAtStartOfDay().toDate());
+		return uniqueResult(namedQuery);
 	}
 
 	public List<Average> findAll() {
@@ -60,15 +72,22 @@ public class AverageDAO extends AbstractDAO<Average> {
 		return list(namedQuery);
 	}
 
+	public List<Average> findAllByMarketAndProduct(Long marketId, Long productId) {
+		Query namedQuery = namedQuery("com.mymarket.core.Average.findAllByMarketAndProduct");
+		namedQuery.setParameter("market_id", marketId);
+		namedQuery.setParameter("product_id", productId);
+		return list(namedQuery);
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<AverageCalculationResult> createAveragesByMarketAndDate(Market market , DateTime now){
 		
 		DateTime tomorrowStart = now.plusDays( 1 ).withTimeAtStartOfDay();
 		
-		Query query = sqlQuery("SELECT PRODUCT_ID, SUM(VALUE) / COUNT(product_id) NUMBER FROM piata.price WHERE market_id = :market_id and date between :startdate and :enddate GROUP by pricE.PRODUCT_ID");
-		query.setParameter(":market_id", market.getId());
-		query.setParameter(":startdate", now.toDate());
-		query.setParameter(":enddate", tomorrowStart.toDate());
+		Query query = sqlQuery("SELECT PRODUCT_ID, SUM(VALUE) / COUNT(product_id) NUMBER FROM piata.price WHERE market_id = ? and date between ? and ? GROUP by pricE.PRODUCT_ID");
+		query.setParameter(0, market.getId());
+		query.setParameter(1, now.toDate());
+		query.setParameter(2, tomorrowStart.toDate());
 		List<AverageCalculationResult> results = new ArrayList<AverageCalculationResult> ();
 		
 		for (Object[] row : (List<Object[]>)query.list()) {
