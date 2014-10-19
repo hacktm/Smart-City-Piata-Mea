@@ -31,28 +31,30 @@ database:
 server:
 #  softNofileLimit: 1000
 #  hardNofileLimit: 1000
-  applicationConnectors:
-    - type: http
+  type: simple
+  applicationContextPath: /api
+  connector:
+      type: http
       port: 8080
-    - type: https
-      port: 8443
-      keyStorePath: example.keystore
-      keyStorePassword: example
-      validateCerts: false
+#    - type: https
+#      port: 8443
+#      keyStorePath: example.keystore
+#      keyStorePassword: example
+#      validateCerts: false
 # this requires the npn-boot library on the JVM's boot classpath
 #    - type: spdy
 #      port: 8445
 #      keyStore: example.keystore
 #      keyStorePassword: example
 #      validateCerts: false
-  adminConnectors:
-    - type: http
-      port: 8081
-    - type: https
-      port: 8444
-      keyStorePath: example.keystore
-      keyStorePassword: example
-      validateCerts: false
+# adminConnectors:
+#    - type: http
+#      port: 8081    
+#    - type: https
+#      port: 8444
+#      keyStorePath: example.keystore
+#      keyStorePassword: example
+#      validateCerts: false
 
 # Logging settings.
 logging:

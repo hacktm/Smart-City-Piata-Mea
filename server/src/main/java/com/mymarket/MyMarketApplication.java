@@ -73,7 +73,7 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 	@Override
 	public void run(MyMarketConfiguration configuration, Environment environment)
 			throws ClassNotFoundException {
-
+		environment.getApplicationContext().setContextPath(configuration.getApplicationContextPath());
 		final Template template = configuration.buildTemplate();
 		environment.healthChecks().register("template",
 				new TemplateHealthCheck(template));

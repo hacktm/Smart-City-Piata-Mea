@@ -19,6 +19,7 @@ public class MyMarketConfiguration extends Configuration {
 	private String defaultName = "Stranger";
 
 	private Integer averageComputationMinutes = 1;
+	private String applicationContextPath = "/api";
 
 	@Valid
 	@NotNull
@@ -67,5 +68,14 @@ public class MyMarketConfiguration extends Configuration {
 	public void setAverageComputationMinutes(Integer averageComputationMinutes) {
 		this.averageComputationMinutes = averageComputationMinutes;
 	}
+	@JsonProperty("applicationContextPath")
+	public String getApplicationContextPath() {
+		return applicationContextPath;
+	}
+	@JsonProperty("applicationContextPath")
+	public void setApplicationContextPath(String applicationContextPath) {
+		this.applicationContextPath = applicationContextPath;
+	}
 
+	
 }

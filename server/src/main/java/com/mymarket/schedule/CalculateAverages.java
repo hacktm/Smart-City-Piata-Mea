@@ -18,7 +18,7 @@ public class CalculateAverages implements org.quartz.Job {
 			throws JobExecutionException {
 		try {
 			logger.info("calculating averages");
-			HttpURLConnection openConnection = (HttpURLConnection) new URL("http://localhost:8080/calculateAverages").openConnection();
+			HttpURLConnection openConnection = (HttpURLConnection) new URL("http://localhost:8080/api/calculateAverages").openConnection();
 			openConnection.setRequestMethod("GET");
 			logger.info("finished averages " + openConnection.getResponseMessage());
 		} catch (Exception e) {
