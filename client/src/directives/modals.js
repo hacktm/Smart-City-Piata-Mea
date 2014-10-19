@@ -19,7 +19,7 @@
                         .error(function() {
                             toastr.error("Produsul nu poate fi salvat.");
                         })
-                }
+                };
 
                 scope.userAdd = function() {
                     $http.put("/api/user", scope.user)
@@ -30,7 +30,7 @@
                         .error(function() {
                             toastr.error("A aparut o problema la inregistrare.");
                         })
-                }
+                };
 
                 scope.login = function() {
                     $http.post("/api/", scope.login)
@@ -41,7 +41,7 @@
                         .error(function() {
                             toastr.error("A aparut o problema, incearca mai tarziu.");
                         })
-                }
+                };
             }
         }
     };

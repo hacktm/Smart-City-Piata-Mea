@@ -7,7 +7,7 @@
             restrict:"AE",
             templateUrl: "views/directives/sidemenu.html",
             link: function(scope) {
-                $http.get("/api/market.json")
+                $http.get("/api/market")
                     .success(function(data) {
                         scope.markets = data;
                         $.each(data, function(i,el){

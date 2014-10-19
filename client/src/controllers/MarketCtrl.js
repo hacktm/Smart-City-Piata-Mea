@@ -6,7 +6,7 @@
         $scope.idMarket = $routeParams.idMarket;
         $scope.query = "";
 
-        $http.get("/api/market/1/products.json")
+        $http.get("/api/market/" + $scope.idMarket + "/product")
             .success(function(data) {
                 $scope.products = data;
             })
