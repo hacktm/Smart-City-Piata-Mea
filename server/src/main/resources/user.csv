@@ -1,0 +1,2 @@
+id,email,password,name,type,isAdmin
+1,mail@something.com,drowssap,someguy,someowner,FALSE

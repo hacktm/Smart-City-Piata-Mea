@@ -29,6 +29,7 @@ import com.mymarket.db.AverageDAO;
 import com.mymarket.db.MarketDAO;
 import com.mymarket.db.PersonDAO;
 import com.mymarket.db.ProductDAO;
+import com.mymarket.db.UserDAO;
 import com.mymarket.health.TemplateHealthCheck;
 import com.mymarket.resources.MarketResource;
 import com.mymarket.resources.MyMarketResource;
@@ -36,6 +37,7 @@ import com.mymarket.resources.PeopleResource;
 import com.mymarket.resources.PersonResource;
 import com.mymarket.resources.ProductResource;
 import com.mymarket.resources.ProtectedResource;
+import com.mymarket.resources.UserResource;
 import com.mymarket.resources.ViewResource;
 import com.mymarket.schedule.CalculateAverages;
 
@@ -104,6 +106,7 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 				hibernateBundle.getSessionFactory());
 		final AverageDAO averageDao = new AverageDAO(
 				hibernateBundle.getSessionFactory());
+	      final UserDAO userDao = new UserDAO(hibernateBundle.getSessionFactory());
 
 		final Template template = configuration.buildTemplate();
 
@@ -121,6 +124,7 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 		environment.jersey()
 				.register(new MarketResource(marketDao, averageDao));
 		environment.jersey().register(new ProductResource(productDao));
+		environment.jersey().register(new UserResource(userDao));
 		
 		try {
 			initializeQuartz();

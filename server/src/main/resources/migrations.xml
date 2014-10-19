@@ -97,4 +97,32 @@
 			</column>
 		</createTable>
 	</changeSet>
+	
+		<changeSet id="6" author="vladilie">
+		<createTable tableName="user">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="email" type="varchar(255)">
+			</column>
+			<column name="password" type="varchar(255)">
+			</column>
+			<column name="name" type="varchar(255)">
+			</column>
+			<column name="type" type="varchar(255)">
+			</column>
+			<column name="isAdmin" type="boolean">
+			</column>
+		</createTable>
+				<loadData encoding="UTF-8" file="user.csv" tableName="user">
+			<column name="id" type="string"/>
+			<column name="email" type="string"/>
+			<column name="password" type="string"/>
+			<column name="name" type="string"/>
+			<column name="type" type="string"/>
+			<column name="isAdmin" type="string"/>
+		
+		</loadData>
+
+	</changeSet>
 </databaseChangeLog>
