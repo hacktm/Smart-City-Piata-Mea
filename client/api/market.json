@@ -1,6 +1,9 @@
 [
-    {"id": 1, "name": "700", "description": "Piata comunala 700", "location": "Strada Paris, Timisoara"},
-    {"id": 2, "name": "Iosefin","description": "Piata Iosefin", "location": "Strada Paris, numarul 2, camera 2"},
-    {"id": 3, "name": "Sinaia","description": "Piata Sinaia", "location": "Strada Paris, numarul 3, camera 2"},
-    {"id": 4, "name": "Badea Cartan","description": "Piata Badea Cartan", "location": "Strada Paris, numarul 4, camera 2"}
+    {"id": 1, "name": "Piata 700", "description": "Piata comunala 700", "location": "Strada Coriolan Brediceanu, Timisoara"},
+    {"id": 2, "name": "Piata Iosefin","description": "Piata Iosefin", "location": "Strada Iancu Vacarescu, Timisoara"},
+    {"id": 3, "name": "Piata Doina","description": "Piata Doina", "location": "Strada Mures, Timisoara"},
+    {"id": 4, "name": "Piata Badea Cartan","description": "Piata de legume, fructe, branzeturi, mezeluri si flori.", "location": "Badea Cartan, Timisoara"}
+    {"id": 5, "name": "Piata Giroc","description": "Piata Giroc", "location": "Strada Martir Elena Nicoara, Timisoara"}
+    {"id": 6, "name": "Piata de Gros", "description": "Piata de legume si fructe en gros", "location": "Strada Ovidiu Balea 2, Timisoara"}
+    {"id": 7, "name": "Piata Dacia", "description": "Piata dintre blocuri", "location": "Strada Burebista, Timisoara"}
 ]
