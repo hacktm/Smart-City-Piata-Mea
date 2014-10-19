@@ -44,7 +44,7 @@
 			</column>
 			<column name="description" type="varchar(255)">
 			</column>
-			<column name="price" type="varchar(255)">
+			<column name="price" type="decimal(10,2)">
 			</column>
 			<column name="image_url" type="varchar(255)">
 			</column>
@@ -76,7 +76,7 @@
 			</column>
 			<column name="date" type="DateTime">
 			</column>
-			<column name="value" type="bigint">
+			<column name="value" type="decimal(10,2)">
 			</column>
 		</createTable>
 	</changeSet>
@@ -90,7 +90,7 @@
 			</column>
 			<column name="product_id" type="bigint">
 			</column>
-			<column name="value" type="bigint">
+			<column name="value" type="decimal(10,2)">
 			</column>
 			<column name="date" type="DateTime">
 			</column>
@@ -99,7 +99,7 @@
 		<loadData encoding="UTF-8" file="price.csv" tableName="price">
 			<column name="market_id" type="string" />
 			<column name="product_id" type="string" />
-			<column name="value" type="string" />
+			<column name="value" type="float" />
 			<column name="date" type="string" />
 		</loadData>
 	</changeSet>
