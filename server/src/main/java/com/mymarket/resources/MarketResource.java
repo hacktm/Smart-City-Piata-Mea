@@ -61,7 +61,7 @@ public class MarketResource {
 	public List<Average> getMarketAveragesById(@PathParam("id") LongParam id) {
 		final List<Average> marketAverages = averageDao.findAllByMarket(id.get());
 		if (marketAverages.isEmpty()) {
-			throw new NotFoundException("No such market.");
+			throw new NotFoundException("No such product in market.");
 		}
 		return marketAverages;
 	}

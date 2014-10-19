@@ -40,10 +40,10 @@ public class ProductResource {
 	}
 	
 	@GET
-	@Path("/product/id")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@UnitOfWork
-	public Product getMarketById(@PathParam("Id") LongParam id) {
+	public Product getProductById(@PathParam("id") LongParam id) {
 		final Optional<Product> product = productDao.findById(id.get());
 		if (!product.isPresent()) {
 			throw new NotFoundException("No such product.");
