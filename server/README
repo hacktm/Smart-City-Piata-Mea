@@ -7,4 +7,5 @@ updatedb.sh
 run.sh
 
 # to execute a Market add you can test with : curl -H "Content-Type: application/json" -X PUT -d '{"name":"Traian","description":"Traian", "location":"Train"}' http://localhost:8080/api/market 
-# to execute a Product add you can test with : curl -H "Content-Type: application/json" -X PUT -d '{"name": "mere","description": "mere","imageUrl": "","origin": "700"}' http://localhost:8080/api/product
+# to execute a Product add you can test with : curl -H "Content-Type: application/json" -X PUT -d '{"marketId": "1","product":"{"name":"pere","description":"bune","imageUrl:http://www.piata-altfel.ro/image/data/pere2.jpg, origin:banat},value: "22"}' http://localhost:8080/api/product/
+# to execute a Product add you can test with : curl -H "Content-Type: application/json" -X POST -d '{"marketId": "1","product":"{name:pere, description:bune, imageUrl:http://www.piata-altfel.ro/image/data/pere2.jpg, origin:banat},value: "22"}' http://localhost:8080/api/product/1
