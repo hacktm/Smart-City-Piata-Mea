@@ -21,6 +21,7 @@ import com.mymarket.core.Template;
 import com.mymarket.db.AverageDAO;
 import com.mymarket.db.MarketDAO;
 import com.mymarket.db.PersonDAO;
+import com.mymarket.db.PriceDAO;
 import com.mymarket.db.ProductDAO;
 import com.mymarket.db.UserDAO;
 import com.mymarket.health.TemplateHealthCheck;
@@ -42,9 +43,10 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 		List<String> argsList = Arrays.asList(args);
 		MyMarketApplication myMarketApplication = new MyMarketApplication();
 		if (argsList.contains("db")) {
-			myMarketApplication.run(new String[] {"db", "migrate", "example.yml"});
-		} else if (argsList.size() == 0){
-			myMarketApplication.run(new String[] {"server", "example.yml"});
+			myMarketApplication.run(new String[] { "db", "migrate",
+					"example.yml" });
+		} else if (argsList.size() == 0) {
+			myMarketApplication.run(new String[] { "server", "example.yml" });
 		} else {
 			myMarketApplication.run(args);
 		}
@@ -73,7 +75,8 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 	@Override
 	public void run(MyMarketConfiguration configuration, Environment environment)
 			throws ClassNotFoundException {
-		environment.getApplicationContext().setContextPath(configuration.getApplicationContextPath());
+		environment.getApplicationContext().setContextPath(
+				configuration.getApplicationContextPath());
 		final Template template = configuration.buildTemplate();
 		environment.healthChecks().register("template",
 				new TemplateHealthCheck(template));
@@ -95,18 +98,20 @@ public class MyMarketApplication extends Application<MyMarketConfiguration> {
 		final MarketDAO marketDao = new MarketDAO(sessionFactory);
 		final ProductDAO productDao = new ProductDAO(sessionFactory);
 		final AverageDAO averageDao = new AverageDAO(sessionFactory);
+		final PriceDAO priceDao = new PriceDAO(sessionFactory);
 		final UserDAO userDao = new UserDAO(sessionFactory);
 
 		JerseyEnvironment jersey = environment.jersey();
 		jersey.register(new BasicAuthProvider<>(new ExampleAuthenticator(),
 				"SUPER SECRET STUFF"));
+		
 		jersey.register(new MyMarketResource(template));
 		jersey.register(new ViewResource());
 		jersey.register(new ProtectedResource());
 		jersey.register(new PeopleResource(dao));
 		jersey.register(new PersonResource(dao));
 		jersey.register(new MarketResource(marketDao, averageDao));
-		jersey.register(new ProductResource(productDao));
+		jersey.register(new ProductResource(productDao, marketDao, priceDao));
 		jersey.register(new CalculateAveragesResource(marketDao, productDao,
 				averageDao));
 		jersey.register(new UserResource(userDao));
