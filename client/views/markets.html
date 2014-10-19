@@ -31,10 +31,12 @@
                                 <span class="glyphicon glyphicon-edit edit_pencil_product"></span>
                             </a>
                             <a href="#/market/{{ idMarket }}/product/{{ product.product.id }}">
-                                <img data-src="http://placehold.it/300x300" src="http://placehold.it/300x300"  alt="...">
+                                <img ng-src="{{image_url}}"  alt="..." />
                                 <div class="caption">
+                                    <h4>{{ product.product.name }}</h4>
                                     <h5>Pret mediu: {{ product.value }} RON</h5>
-                                    <p>{{ product.product.name }}</p>
+                                    <p>{{ product.product.description }}</p>
+                                    <p>din {{ product.product.origin }}</p>
                                 </div>
                             </a>
                         </div>

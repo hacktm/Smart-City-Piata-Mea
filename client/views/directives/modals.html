@@ -11,15 +11,15 @@
                 <form class="form" role="form">
                     <div class="form-group">
                         <label class="control-label" for="nume_prenume">Nume si Prenume</label>
-                        <input type="text" class="form-control" id="nume_prenume">
+                        <input type="text" class="form-control" id="nume_prenume" ng-model="user.nume">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="email">Email</label>
-                        <input type="email" class="form-control" id="email">
+                        <input type="email" class="form-control" id="email" ng-model="user.email">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="pass1">Parola</label>
-                        <input type="password" class="form-control" id="pass1">
+                        <input type="password" class="form-control" id="pass1" ng-model="user.pass">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="pass2">Repeta parola</label>
@@ -29,7 +29,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Renunta</button>
-                <button type="button" class="btn btn-success">Salveaza</button>
+                <button type="button" class="btn btn-success" ng-click="addUser()">Salveaza</button>
             </div>
         </div>
     </div>
@@ -46,17 +46,17 @@
                 <form class="form" role="form">
                     <div class="form-group">
                         <label class="control-label" for="email">Email</label>
-                        <input type="email" class="form-control" id="email_login">
+                        <input type="email" class="form-control" id="email_login" ng-model="login.email">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="pass1">Parola</label>
-                        <input type="password" class="form-control" id="pass_login">
+                        <input type="password" class="form-control" id="pass_login" ng-model="login.password">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Renunta</button>
-                <button type="button" class="btn btn-success">Login</button>
+                <button type="button" class="btn btn-success" ng-click="login()">Login</button>
             </div>
         </div>
     </div>

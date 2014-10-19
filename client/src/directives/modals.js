@@ -11,13 +11,35 @@
             templateUrl: "views/directives/modals.html",
             link: function(scope) {
                 scope.productAdd = function() {
-                    $http.post("/api/market" + scope.idMarket + "/product", scope.newProd)
+                    $http.put("/api/market" + scope.idMarket + "/product", scope.newProd)
                         .success(function() {
                             toastr.success("Produsul a fost salvat");
                             $("#addproduct_modal").modal("close");
                         })
                         .error(function() {
                             toastr.error("Produsul nu poate fi salvat.");
+                        })
+                }
+
+                scope.userAdd = function() {
+                    $http.put("/api/user", scope.user)
+                        .success(function() {
+                            toastr.success("Te-ai inregistrat cu success!");
+                            $("#signup_modal").modal("close");
+                        })
+                        .error(function() {
+                            toastr.error("A aparut o problema la inregistrare.");
+                        })
+                }
+
+                scope.login = function() {
+                    $http.post("/api/", scope.login)
+                        .success(function() {
+                           // toastr.success("Ai");
+                            $("#signin_modal").modal("close");
+                        })
+                        .error(function() {
+                            toastr.error("A aparut o problema, incearca mai tarziu.");
                         })
                 }
             }
