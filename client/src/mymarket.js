@@ -26,6 +26,7 @@
                 templateUrl: "views/product_edit.html",
                 controller: "ProductEditCtrl"
             })
+            .otherwise({redirectTo: "/"})
     });
 
 } ());
