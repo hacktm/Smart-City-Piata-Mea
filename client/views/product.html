@@ -4,19 +4,28 @@
     </div>
 
     <div class="col-md-8">
-        <div class="row well well-sm" style="margin-top: 40px;">
-            <div class="col-md-7">
+        <div class="row well well-sm" style="margin-top: 30px;">
+            <div class="col-md-6">
                 <h2 id="product_title">Mere Golden</h2>
             </div>
-            <div class="col-md-4 pull-right">
-                <button type="button" class="btn btn-primary pull-right" style="position: relative;top: 15px;"><span class="glyphicon glyphicon-plus"></span> Adauga pret</button>
+            <div class="col-md-6 pull-right">
+                <form class="form-inline" role="form" style="margin-top:15px;">
+                    <div class="form-group">
+                        <label class="sr-only" for="value">Email address</label>
+                        <input type="text" class="form-control" id="value" placeholder="Pret" ng-model="newPrice">
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="addPrice()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Adauga Pret
+                    </button>
+                </form>
             </div>
         </div>
 
         <!--<div class="well well-lg">-->
             <div class="row well well-lg">
 
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-4" ng-repeat="price in prices">
                     <div class="thumbnail">
                         <button type="button" class="btn btn-sm btn-info popovered edit_pencil" data-container="body"
                                 data-toggle="popover" data-placement="left" title="Schimba pret" data-html="true"
@@ -31,15 +40,15 @@
                         </button>
                         <img data-src="http://placehold.it/100x100" src="http://placehold.it/100x100" alt="...">
                         <div class="caption">
-                            <h5>Nume Utilizator</h5>
-                            <p>Pret adaugat: 3.5 RON</p>
+                            <h3>{{ price.value }} RON</h3>
+                            <h5>Adaugat de: {{ price.name }}</h5>
                             <p>
                             <div class="btn-group btn-group-justified">
                                 <div class="btn-group btn-group-sm">
-                                    <a href="#" class="btn btn-sm btn-success tipped" role="button" data-toggle="tooltip" data-placement="top" title="Pretul e corect!"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                    <button class="btn btn-sm btn-success tipped" role="button" data-toggle="tooltip" data-placement="top" title="Pretul e corect!"><span class="glyphicon glyphicon-thumbs-up"></span></button>
                                 </div>
                                 <div class="btn-group btn-group-sm">
-                                    <a href="#" class="btn btn-sm btn-danger tipped" role="button" data-toggle="tooltip" data-placement="top" title="Nu sunt de acord!"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                                    <button class="btn btn-sm btn-danger tipped" role="button" data-toggle="tooltip" data-placement="top" title="Nu sunt de acord!"><span class="glyphicon glyphicon-thumbs-down"></span></button>
                                 </div>
                             </div>
                             </p>

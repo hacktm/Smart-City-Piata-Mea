@@ -10,11 +10,17 @@
             restrict: "AE",
             templateUrl: "views/directives/modals.html",
             link: function(scope) {
+                scope.newProd = {
+                    marketId: scope.idMarket
+                };
+
                 scope.productAdd = function() {
-                    $http.put("/api/market" + scope.idMarket + "/product", scope.newProd)
+                    $http.put("/api/product", scope.newProd)
                         .success(function() {
+//                            console.log(JSON.stringify(scope.newProd));
                             toastr.success("Produsul a fost salvat");
-                            $("#addproduct_modal").modal("close");
+                            $("#addproduct_modal").modal("hide");
+                            scope.products.push(scope.newProd);
                         })
                         .error(function() {
                             toastr.error("Produsul nu poate fi salvat.");
