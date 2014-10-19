@@ -4,9 +4,11 @@ import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.LongParam;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,7 +21,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Optional;
 import com.mymarket.core.Market;
 import com.mymarket.core.Product;
+import com.mymarket.db.MarketDAO;
+import com.mymarket.db.PriceDAO;
 import com.mymarket.db.ProductDAO;
+import com.mymarket.view.ProductAddView;
 import com.sun.jersey.api.NotFoundException;
 
 @Path("/product")
@@ -27,9 +32,14 @@ import com.sun.jersey.api.NotFoundException;
 public class ProductResource {
 
 	private final ProductDAO productDao;
+	private final MarketDAO marketDao;
+	private final PriceDAO priceDao;
 
-	public ProductResource(ProductDAO productDao) {
+	public ProductResource(ProductDAO productDao, MarketDAO marketDao,
+			PriceDAO priceDao) {
 		this.productDao = productDao;
+		this.marketDao = marketDao;
+		this.priceDao = priceDao;
 	}
 
 	@GET
@@ -38,7 +48,7 @@ public class ProductResource {
 	public List<Product> getMarkets() {
 		return productDao.findAll();
 	}
-	
+
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -50,13 +60,27 @@ public class ProductResource {
 		}
 		return product.get();
 	}
-	
+
 	@PUT
 	@UnitOfWork
-	public void addProduct(String json){
+	public void addProduct(String json) {
 		try {
-			Product productValues = new ObjectMapper().readValue(json, Product.class);
-			productDao.create(productValues);
+			ProductAddView productAddValues = new ObjectMapper().readValue(
+					json, ProductAddView.class);
+
+			Product productValues = productAddValues.getProduct();
+
+			Product product = productDao.create(productValues);
+			Optional<Market> foundMarket = marketDao.findById(productAddValues
+					.getMarketId());
+			if (!foundMarket.isPresent()) {
+				throw new NotFoundException("Piata lipsa");
+			}
+
+			Market market = foundMarket.get();
+			priceDao.create(market, product, new Date(),
+					productAddValues.getValue());
+
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -65,15 +89,29 @@ public class ProductResource {
 			e.printStackTrace();
 		}
 	}
-	
-	@PUT
+
+	@POST
 	@Path("/{id}")
 	@UnitOfWork
-	public void editProduct(@PathParam("id") LongParam id,String json){
+	public void editProduct(@PathParam("id") LongParam id, String json) {
 		try {
-			Product productValues = new ObjectMapper().readValue(json, Product.class);
+			ProductAddView productAddValues = new ObjectMapper().readValue(
+					json, ProductAddView.class);
+
+			Product productValues = productAddValues.getProduct();
 			productValues.setId(id.get());
-			productDao.update(productValues);
+
+			Product product = productDao.update(productValues);
+			Optional<Market> foundMarket = marketDao.findById(productAddValues
+					.getMarketId());
+			if (!foundMarket.isPresent()) {
+				throw new NotFoundException("Piata lipsa");
+			}
+
+			Market market = foundMarket.get();
+			priceDao.create(market, product, new Date(),
+					productAddValues.getValue());
+
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
