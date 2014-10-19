@@ -10,14 +10,14 @@
                ng-class="{active: isActive(market.id)}">{{ market.name }}</a>
         </div>
     </div>
-    <div class="panel panel-default">
+    <div ng-show="activeMarket" class="panel panel-default">
         <div class="panel-body">
-            Badea Cartan, Adresa: Str. Badea Cartan nr 100<br>
+            <!--Badea Cartan, Adresa: Str. Badea Cartan nr 100<br>-->
+            {{ activeMarket }}<br>
 
             <div class="col-md-12">
                 <a href="#" class="thumbnail">
-                    <img id="static_map" data-src="" src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=250x180&maptype=roadmap
-&markers=color:blue%7Clabel:S%7C40.702147,-74.015794" alt="...">
+                    <img id="static_map" data-src="" src="" alt="...">
                 </a>
             </div>
         </div>
