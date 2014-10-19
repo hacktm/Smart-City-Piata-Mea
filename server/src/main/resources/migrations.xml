@@ -99,7 +99,7 @@
 		<loadData encoding="UTF-8" file="price.csv" tableName="price">
 			<column name="market_id" type="string" />
 			<column name="product_id" type="string" />
-			<column name="value" type="float" />
+			<column name="value" type="numeric" />
 			<column name="date" type="string" />
 		</loadData>
 	</changeSet>
